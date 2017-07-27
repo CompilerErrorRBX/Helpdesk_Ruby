@@ -1,0 +1,31 @@
+- content_for :nav do
+  %li
+    %a
+      %i.material-icons
+        view_module
+  %li
+    %a
+      %i.material-icons
+        person
+
+- content_for :sidebar do
+  %ul
+    %li
+      %a
+        %i.material-icons
+          person
+        %span
+          People
+  %ul
+    %li
+      %a
+        %i.material-icons
+          favorite
+        %span
+          Favorites
+
+.card
+  .card-content
+    .card-title
+      Hello, World!
+    Some content

@@ -1,0 +1,159 @@
+$small-screen: 600px;
+$large-screen: 1024px;
+
+@mixin respond-to($media) {
+    @if $media == small-screen {
+        @media only screen and (max-width: $small-screen) { @content; }
+    }
+    @else if $media == medium-screen {
+        @media only screen and (min-width: $small-screen + 1) and (max-width: $large-screen - 1) { @content; }
+    }
+    @else if $media == wide-screen {
+        @media only screen and (min-width: $large-screen) { @content; }
+    }
+    @else if $media == not-small-screen {
+        @media only screen and (min-width: $small-screen) { @content; }
+    }
+    @else if $media == not-large-screen {
+        @media only screen and (max-width: $large-screen - 1) { @content; }
+    }
+}
+
+body {
+    main {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .side-bar {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        width: 280px;
+        height: calc(100vh - 64px);
+
+        .footer {
+            flex: 0 0 auto;
+            padding: 8px 16px;
+        }
+
+        .body {
+            flex: 1 0 auto;
+
+            ul {
+                width: 100%;
+                margin: 8px 0;
+
+                border-bottom: 1px solid #ddd;
+
+                li {
+                    min-height: 40px;
+
+                    transition: background-color 0.1s;
+
+                    a {
+                        display: block;
+                        height: 40px;
+                        padding-left: 24px;
+                        line-height: 40px;
+                        color: rgba(0,0,0,0.55);
+                    }
+
+                    i.material-icons {
+                        line-height: 40px;
+                        height: 40px;
+                        float: left;
+                        color: inherit;
+                    }
+
+                    span {
+                        display: inline-block;
+                        padding-left: 32px;
+                        line-height: 40px;
+                        height: 40px;
+                        color: inherit;
+
+                        font-size: 0.9rem;
+                    }
+
+                    &:hover {
+                        background-color: rgba(0,0,0,0.05);
+                    }
+                }
+
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+
+        }
+        
+        .tool-bar {
+            display: none;
+            height: auto;
+            background-color: rgba(0,0,0,0.05);
+
+            @include respond-to(not-large-screen) { 
+                display: block;
+            }
+        }
+
+        @include respond-to(not-large-screen) { 
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+
+            z-index: 1000;
+
+            background-color: #fff;
+
+            box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.3);
+        }
+    }
+
+}
+
+nav {
+    .nav-wrapper {
+        display: flex;
+        flex-direction: row;
+        
+        .title {
+            position: relative;
+            margin: 0 36px 0 16px;
+            font-size: 1.8rem;
+        }
+
+        .search {
+            flex: 1 0 auto;
+            padding: 8px 16px 8px 0;
+            
+            .input-field {
+
+                input {
+                    border-radius: 2px;
+                    background-color: rgba(0,0,0,0.05);
+                    
+                    &:focus {
+                        border-radius: 2px;
+                        background-color: rgb(255,255,255);
+                    }
+                }
+
+                label {
+                    transform: none;
+                }
+
+                .material-icons {
+                    line-height: 52px;
+
+                    @include respond-to(small-screen) { 
+                        line-height: 46px; 
+                    }
+                }
+            }
+        }
+    }
+}

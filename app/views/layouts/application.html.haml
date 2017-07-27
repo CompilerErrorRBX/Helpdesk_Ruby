@@ -1,0 +1,52 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %title Stockie
+
+    / Import Google Icon Font
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
+    / Compiled and minified CSS
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css", :rel => "stylesheet"}
+
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+    / Compiled and minified JavaScript
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"}
+  %body
+    %header
+      %nav{:class => @primary_color}
+        .nav-wrapper
+          %ul
+            %li
+              %a.sidebar-expand
+                %i.material-icons
+                  menu
+          %a.title{:href => "#"} Dashboard
+          %form.search
+            .input-field
+              %input{:id => "search", :type => "search"}
+              %label.label-icon{:for => "search"}
+                %i.material-icons
+                  search
+              %i.material-icons
+                close
+          %ul#nav-mobile.right.hide-on-med-and-down
+            = yield :nav
+    %main
+      .side-bar
+        .tool-bar
+          %ul
+            %li
+              %a
+                %i.material-icons
+                  person
+        .body
+          = yield :sidebar
+        .footer
+          Contact
+          = yield :footer
+      .container
+        = yield
