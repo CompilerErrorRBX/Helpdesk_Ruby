@@ -3,7 +3,7 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    %title Stockie
+    %title Project
 
     / Import Google Icon Font
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
@@ -23,18 +23,15 @@
           %ul
             %li.side-bar-toggle
               %a.waves-effect.waves-light
-                %i.material-icons
-                  menu
-          %a.title{:href => "#"} Dashboard
+                %i.material-icons menu
+          %a.title{:href => "#"} Project
           .flex-middle
             %form.search.hide-on-small-only
               .input-field
-                %input{:id => "search", :type => "search"}
+                %input.z-depth-2{:id => "search", :type => "search", :placeholder => "Search"}
                 %label.label-icon{:for => "search"}
-                  %i.material-icons
-                    search
-                %i.material-icons
-                  close
+                  %i.material-icons search
+                %i.material-icons close
           %ul#nav-mobile.right.hide-on-med-and-down
             = yield :nav
     %main
@@ -43,15 +40,13 @@
           %ul.left
             %li.side-bar-toggle
               %a
-                %i.material-icons
-                  arrow_back
+                %i.material-icons arrow_back
           %ul.right
             = yield :nav
         .body
-          %a.title
-            Dashboard
+          %a.title Project
           = yield :sidebar
-        .footer
+        .footer 
           Contact
           = yield :footer
       %div{:id => "main-container"}
