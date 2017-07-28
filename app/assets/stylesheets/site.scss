@@ -2,272 +2,260 @@ $mobile-screen: 428px;
 $small-screen: 600px;
 $large-screen: 993px;
 $x-large-screen: 1400px;
-$navbar-height: 64px;
-
 @mixin respond-to($media) {
-    @if $media == mobile-screen {
-        @media only screen and (max-width: $mobile-screen) { @content; }
+  @if $media==mobile-screen {
+    @media only screen and (max-width: $mobile-screen) {
+      @content;
     }
-    @if $media == small-screen {
-        @media only screen and (max-width: $small-screen) { @content; }
+  }
+  @if $media==small-screen {
+    @media only screen and (max-width: $small-screen) {
+      @content;
     }
-    @else if $media == medium-screen {
-        @media only screen and (min-width: $small-screen + 1) and (max-width: $large-screen - 1) { @content; }
+  }
+  @else if $media==medium-screen {
+    @media only screen and (min-width: $small-screen + 1) and (max-width: $large-screen - 1) {
+      @content;
     }
-    @else if $media == large-screen {
-        @media only screen and (min-width: $large-screen) { @content; }
+  }
+  @else if $media==large-screen {
+    @media only screen and (min-width: $large-screen) {
+      @content;
     }
-    @else if $media == x-large-screen {
-        @media only screen and (min-width: $x-large-screen) { @content; }
+  }
+  @else if $media==x-large-screen {
+    @media only screen and (min-width: $x-large-screen) {
+      @content;
     }
-    @else if $media == not-small-screen {
-        @media only screen and (min-width: $small-screen) { @content; }
+  }
+  @else if $media==not-small-screen {
+    @media only screen and (min-width: $small-screen) {
+      @content;
     }
-    @else if $media == not-large-screen {
-        @media only screen and (max-width: $large-screen - 1) { @content; }
+  }
+  @else if $media==not-large-screen {
+    @media only screen and (max-width: $large-screen - 1) {
+      @content;
     }
+  }
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    font-size: 12pt;
+  width: 100%;
+  height: 100%;
+  font-size: 12pt;
 }
 
 .container-responsive {
-    width: 90%;
-    max-width: 784px;
-    margin: auto;
-
-    @include respond-to(small-screen) { 
-        width: 100%;
-    }
-
-    @include respond-to(medium-screen) { 
-        max-width: 528px;
-    }
-
-    @include respond-to(x-large-screen) { 
-        max-width: 1296px;
-    }
+  width: 90%;
+  max-width: 784px;
+  margin: auto;
+  @include respond-to(small-screen) {
+    width: 100%;
+  }
+  @include respond-to(medium-screen) {
+    max-width: 528px;
+  }
+  @include respond-to(x-large-screen) {
+    max-width: 1296px;
+  }
 }
 
 body {
-    #main-container {
-        transition: padding 0.5s;
+  background-color: #eee;
+  #main-container {
+    transition: padding 0.5s;
+  }
+  .side-bar {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 100%;
+    max-height: calc(100% - 64px);
+    left: 0;
+    top: 64px;
+    transition: left 0.5s;
+    @extend .scrollbar-helper;
+    @include respond-to(large-screen) {
+      &+#main-container {
+        padding-left: 280px;
+      }
+      &.active {
+        left: -280px;
+        &+#main-container {
+          padding-left: 0;
+        }
+      }
     }
-
-    .side-bar {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-
-        width: 280px;
-        height: calc(100vh - 64px);
-        left: 0;
-        top: $navbar-height;
-
-        transition: left 0.5s;
-
-        @include respond-to(large-screen) { 
-            & + #main-container {
-                padding-left: 280px;
-            }
-            
-            &.active {
-                left: -280px;
-
-                & + #main-container {
-                    padding-left: 0;
-                }
-            }
-        }
-
-        @include respond-to(not-large-screen) { 
-            &:not(.active) {
-                left: -280px;
-            }
-        }
-
-        .footer {
-            flex: 0 0 auto;
-            padding: 8px 16px;
-            color: rgba(0,0,0,0.55);
-        }
-
-        .body {
-            flex: 1 0 auto;
-
-            .title {
-                display: none;
-                padding: 16px 0 0 24px;
-                font-size: 1.8rem;
-                color: rgba(0,0,0,0.55);
-
-                @include respond-to(not-large-screen) { 
-                    display: block;
-                }
-            }
-
-            ul {
-                width: 100%;
-                margin: 8px 0;
-
-                border-bottom: 1px solid #ddd;
-
-                li {
-                    min-height: 40px;
-                    transition: background-color 0.1s;
-
-                    cursor: pointer;
-
-                    a {
-                        display: block;
-                        height: 40px;
-                        padding-left: 24px;
-                        line-height: 40px;
-                        color: rgba(0,0,0,0.55);
-                    }
-
-                    i.material-icons {
-                        line-height: 40px;
-                        height: 40px;
-                        float: left;
-                        color: inherit;
-                    }
-
-                    span {
-                        display: inline-block;
-                        padding-left: 32px;
-                        line-height: 40px;
-                        height: 40px;
-                        color: inherit;
-
-                        font-size: 0.9rem;
-                    }
-
-                    &:hover {
-                        background-color: rgba(0,0,0,0.05);
-                    }
-                    
-                }
-                
-                &:last-child {
-                    border-bottom: none;
-                }
-            }
-        }
-       
-        .tool-bar {
-            display: none;
-            background-color: rgba(0,0,0,0.05);
-
-            height: 64px;
-
-            ul {
-                height: inherit;
-                margin: 0;
-                padding: 0 8px;
-
-                li {
-                    display: inline-block;
-                    height: inherit;
-                    padding: 8px 0px;
-
-                    a {
-                        display: inline-block;
-                        width: 48px;
-                        height: 48px;
-                        line-height: 64px;
-                        color: rgba(0,0,0,0.55);
-
-                        border-radius: 50%;
-                        text-align: center;
-
-                        transition: background-color 0.2s;
-
-                        cursor: pointer;
-
-                        &:hover {
-                            background-color: rgba(0,0,0,0.05);
-                        }
-                    }
-                }
-            }
-
-            @include respond-to(not-large-screen) { 
-                display: block;
-            }
-        }
-
-        @include respond-to(not-large-screen) { 
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 100vh;
-
-            z-index: 1000;
-
-            background-color: #fff;
-
-            box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.3);
-        }
+    @include respond-to(not-large-screen) {
+      max-height: 100%;
+      &:not(.active) {
+        left: -280px;
+      }
     }
-
+    .footer {
+      flex: 0 0 auto;
+      padding: 8px 16px;
+      color: rgba(0, 0, 0, 0.55);
+    }
+    .body {
+      flex: 1 0 auto;
+      .title {
+        display: none;
+        padding: 16px 0 0 24px;
+        font-size: 1.8rem;
+        color: rgba(0, 0, 0, 0.55);
+        @include respond-to(not-large-screen) {
+          display: block;
+        }
+      }
+      ul {
+        width: 100%;
+        margin: 0;
+        padding: 8px 0;
+        border-bottom: 1px solid #ddd;
+        li {
+          min-height: 40px;
+          transition: background-color 0.1s;
+          padding: 4px 0;
+          cursor: pointer;
+          a {
+            display: block;
+            height: 40px;
+            padding-left: 24px;
+            line-height: 40px;
+            color: rgba(0, 0, 0, 0.55);
+          }
+          i.material-icons {
+            line-height: 40px;
+            height: 40px;
+            float: left;
+            color: inherit;
+          }
+          span {
+            display: inline-block;
+            padding-left: 32px;
+            line-height: 40px;
+            height: 40px;
+            color: inherit;
+            font-size: 0.9rem;
+          }
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+          }
+        }
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+    .tool-bar {
+      display: none;
+      background-color: rgba(0, 0, 0, 0.05);
+      height: 64px;
+      ul {
+        height: inherit;
+        margin: 0;
+        padding: 0 8px;
+        li {
+          display: inline-block;
+          height: inherit;
+          padding: 8px 0px;
+          a {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            line-height: 64px;
+            color: rgba(0, 0, 0, 0.55);
+            border-radius: 50%;
+            text-align: center;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            &:hover {
+              background-color: rgba(0, 0, 0, 0.05);
+            }
+          }
+        }
+      }
+      @include respond-to(not-large-screen) {
+        display: block;
+      }
+    }
+    @include respond-to(not-large-screen) {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      z-index: 1000;
+      background-color: #fff;
+      box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+    }
+  }
 }
 
 nav {
-    &.fixed {
-        position: fixed;
+  &.fixed {
+    position: fixed;
+  }
+  .nav-wrapper {
+    display: flex;
+    flex-direction: row;
+    .title {
+      position: relative;
+      margin: 0 36px 0 16px;
+      font-size: 1.8rem;
     }
-
-    .nav-wrapper {
-        display: flex;
-        flex-direction: row;
-        
-        .title {
-            position: relative;
-            margin: 0 36px 0 16px;
-            font-size: 1.8rem;
+    .search {
+      padding: 8px 16px 8px 0;
+      max-width: 720px;
+      .input-field {
+        input {
+          border-radius: 5px;
+          background-color: rgba(0, 0, 0, 0.05);
+          transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+          &:focus {
+            border-radius: 5px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+          }
         }
-
-        .search {
-            padding: 8px 16px 8px 0;
-            max-width: 720px;
-
-            .input-field {
-
-                input {
-                    border-radius: 5px;
-                    background-color: rgba(0,0,0,0.05);
-                    
-                    transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
-
-                    &:focus {
-                        border-radius: 5px;
-                        background-color: rgb(255,255,255);
-                        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-                    }
-                }
-
-                label {
-                    transform: none;
-                }
-
-                .material-icons {
-                    line-height: 52px;
-                    font-size: 1.5rem;
-
-                    @include respond-to(small-screen) { 
-                        line-height: 46px; 
-                    }
-                }
-            }
+        label {
+          transform: none;
         }
+        .material-icons {
+          line-height: 52px;
+          font-size: 1.5rem;
+          @include respond-to(small-screen) {
+            line-height: 46px;
+          }
+        }
+      }
     }
+  }
 }
 
 .flex-middle {
-    flex: 1 0 auto;
+  flex: 1 0 auto;
+}
+
+.scrollbar-helper {
+  overflow-y: overlay;
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    transition: background-color 0.2s;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.35)
+  }
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.25);
+    }
+  }
 }

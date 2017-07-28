@@ -46,6 +46,19 @@
         .body
           %a.title Project
           = yield :sidebar
+          %ul
+            %li
+              %a
+                %i.material-icons settings
+                %span Settings
+            %li
+              %a
+                %i.material-icons feedback
+                %span Send Feedback
+            %li
+              %a
+                %i.material-icons help
+                %span Help
         .footer 
           Contact
           = yield :footer
