@@ -1,5 +1,5 @@
 $small-screen: 600px;
-$large-screen: 1024px;
+$large-screen: 993px;
 
 @mixin respond-to($media) {
     @if $media == small-screen {
@@ -49,8 +49,9 @@ body {
 
                 li {
                     min-height: 40px;
-
                     transition: background-color 0.1s;
+
+                    cursor: pointer;
 
                     a {
                         display: block;
@@ -82,8 +83,10 @@ body {
                     }
                 }
 
-                &:last-child {
-                    border-bottom: none;
+                &:not(.title) {
+                    &:last-child() {
+                        border-bottom: none;
+                    }
                 }
             }
 
@@ -91,8 +94,40 @@ body {
         
         .tool-bar {
             display: none;
-            height: auto;
             background-color: rgba(0,0,0,0.05);
+
+            height: 64px;
+
+            ul {
+                height: inherit;
+                margin: 0;
+                padding: 0 8px;
+
+                li {
+                    display: inline-block;
+                    height: inherit;
+                    padding: 8px 0px;
+
+                    a {
+                        display: inline-block;
+                        width: 48px;
+                        height: 48px;
+                        line-height: 64px;
+                        color: rgba(0,0,0,0.55);
+
+                        border-radius: 50%;
+                        text-align: center;
+
+                        transition: background-color 0.2s;
+
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: rgba(0,0,0,0.05);
+                        }
+                    }
+                }
+            }
 
             @include respond-to(not-large-screen) { 
                 display: block;

@@ -38,12 +38,17 @@
     %main
       .side-bar
         .tool-bar
-          %ul
-            %li
+          %ul.left
+            %li{:id => "sidebar-close"}
               %a
                 %i.material-icons
-                  person
+                  arrow_back
+          %ul.right
+            = yield :nav
         .body
+          %ul.title
+            %li
+              %a.title{:href => "#"} Dashboard
           = yield :sidebar
         .footer
           Contact
