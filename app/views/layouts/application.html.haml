@@ -2,6 +2,7 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     %title Stockie
 
     / Import Google Icon Font
@@ -20,38 +21,45 @@
       %nav{:class => @primary_color}
         .nav-wrapper
           %ul
-            %li
-              %a.sidebar-expand
+            %li.side-bar-toggle
+              %a.waves-effect.waves-light
                 %i.material-icons
                   menu
           %a.title{:href => "#"} Dashboard
-          %form.search
-            .input-field
-              %input{:id => "search", :type => "search"}
-              %label.label-icon{:for => "search"}
+          .flex-middle
+            %form.search.hide-on-small-only
+              .input-field
+                %input{:id => "search", :type => "search"}
+                %label.label-icon{:for => "search"}
+                  %i.material-icons
+                    search
                 %i.material-icons
-                  search
-              %i.material-icons
-                close
+                  close
           %ul#nav-mobile.right.hide-on-med-and-down
             = yield :nav
     %main
       .side-bar
         .tool-bar
           %ul.left
-            %li{:id => "sidebar-close"}
+            %li.side-bar-toggle
               %a
                 %i.material-icons
                   arrow_back
           %ul.right
             = yield :nav
         .body
-          %ul.title
-            %li
-              %a.title{:href => "#"} Dashboard
+          %a.title
+            Dashboard
           = yield :sidebar
         .footer
           Contact
           = yield :footer
-      .container
-        = yield
+      %div{:id => "main-container"}
+        .container-responsive
+          = yield
+    :javascript
+      $(() => {
+        $('.side-bar-toggle').click(() => {
+          $('.side-bar').toggleClass('active');
+        });
+      });
