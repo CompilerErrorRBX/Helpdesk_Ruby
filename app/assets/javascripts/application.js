@@ -15,4 +15,13 @@
 //= require turbolinks
 //= require_tree .
 
+$(() => {
+  $('[data-popover]').click(function(e) {
+    const $this = $(this);
+    const position = $this.offset();
+    const $popover = $($this.attr('data-popover'));
+    console.log(position);
+    $popover.css({ 'top': `${position.top}px`, 'left': `${position.left}px` }).addClass('active');
 
+  });
+});
