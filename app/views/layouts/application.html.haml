@@ -1,4 +1,6 @@
 !!!
+- @primary_color ||= 'blue'
+
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
@@ -19,34 +21,36 @@
   %body
     %header
       %nav{:class => @primary_color}
-        .nav-wrapper
-          %ul
-            %li.side-bar-toggle
+        .nav-wrapper.flex.flex-row
+          %ul.horizontal
+            %li.circle.side-bar-toggle
               %a.waves-effect.waves-light
                 %i.material-icons menu
           %a.title{:href => "#"} Project
-          .flex-middle
-            %form.search.hide-on-small-only
+          .flex.flex-md
+            %form.search.flex-md.hide-on-small-only
               .input-field
-                %input.z-depth-2{:id => "search", :type => "search", :placeholder => "Search"}
+                %input#search.z-depth-2{:type => "search", :placeholder => "Search"}
                 %label.label-icon{:for => "search"}
                   %i.material-icons search
                 %i.material-icons close
-          %ul#nav-mobile.right.hide-on-med-and-down
-            = yield :nav
+            %ul.horizontal
+              = yield :nav
+          %ul#profile-options.horizontal.hide-on-med-and-down
+            = render 'layouts/navigation'
     %main
-      .side-bar
+      .side-bar.grey-text.text-darken-2
         .tool-bar
-          %ul.left
-            %li.side-bar-toggle
+          %ul.horizontal.left
+            %li.circle.side-bar-toggle
               %a
                 %i.material-icons arrow_back
-          %ul.right
-            = yield :nav
+          %ul.horizontal.right
+            = render 'layouts/navigation'
         .body
           %a.title Project
           = yield :sidebar
-          %ul
+          %ul.vertical
             %li
               %a
                 %i.material-icons settings
@@ -62,7 +66,7 @@
         .footer 
           Contact
           = yield :footer
-      %div{:id => "main-container"}
+      #main-container
         .container-responsive
           = yield
     :javascript

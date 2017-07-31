@@ -54,9 +54,6 @@ body {
   @include respond-to(small-screen) {
     width: 100%;
   }
-  @include respond-to(medium-screen) {
-    max-width: 528px;
-  }
   @include respond-to(x-large-screen) {
     max-width: 1296px;
   }
@@ -77,7 +74,7 @@ body {
     left: 0;
     top: 64px;
     transition: left 0.5s;
-    @extend .scrollbar-helper;
+    @extend %scrollbar-helper;
     @include respond-to(large-screen) {
       &+#main-container {
         padding-left: 280px;
@@ -111,74 +108,12 @@ body {
           display: block;
         }
       }
-      ul {
-        width: 100%;
-        margin: 0;
-        padding: 8px 0;
-        border-bottom: 1px solid #ddd;
-        li {
-          min-height: 40px;
-          transition: background-color 0.1s;
-          padding: 4px 0;
-          cursor: pointer;
-          a {
-            display: block;
-            height: 40px;
-            padding-left: 24px;
-            line-height: 40px;
-            color: rgba(0, 0, 0, 0.55);
-          }
-          i.material-icons {
-            line-height: 40px;
-            height: 40px;
-            float: left;
-            color: inherit;
-          }
-          span {
-            display: inline-block;
-            padding-left: 32px;
-            line-height: 40px;
-            height: 40px;
-            color: inherit;
-            font-size: 0.9rem;
-          }
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-          }
-        }
-        &:last-child {
-          border-bottom: none;
-        }
-      }
     }
     .tool-bar {
       display: none;
       background-color: rgba(0, 0, 0, 0.05);
+      padding: 0 8px;
       height: 64px;
-      ul {
-        height: inherit;
-        margin: 0;
-        padding: 0 8px;
-        li {
-          display: inline-block;
-          height: inherit;
-          padding: 8px 0px;
-          a {
-            display: inline-block;
-            width: 48px;
-            height: 48px;
-            line-height: 64px;
-            color: rgba(0, 0, 0, 0.55);
-            border-radius: 50%;
-            text-align: center;
-            transition: background-color 0.2s;
-            cursor: pointer;
-            &:hover {
-              background-color: rgba(0, 0, 0, 0.05);
-            }
-          }
-        }
-      }
       @include respond-to(not-large-screen) {
         display: block;
       }
@@ -200,12 +135,15 @@ nav {
     position: fixed;
   }
   .nav-wrapper {
-    display: flex;
-    flex-direction: row;
+    padding: 0 8px;
     .title {
       position: relative;
+      color: inherit;
       margin: 0 36px 0 16px;
       font-size: 1.8rem;
+    }
+    #profile-options {
+      padding: 0 4px 0 32px;
     }
     .search {
       padding: 8px 16px 8px 0;
@@ -236,11 +174,167 @@ nav {
   }
 }
 
-.flex-middle {
+ul {
+  list-style-type: none;
+  color: inherit;
+  a {
+    display: block;
+    color: inherit;
+    line-height: inherit;
+  }
+  li {
+    color: inherit;
+  }
+  i.material-icons {
+    line-height: inherit;
+    height: inherit;
+    color: inherit;
+  }
+  &.horizontal {
+    height: inherit;
+    line-height: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      height: inherit;
+      line-height: inherit;
+      a {
+        cursor: pointer;
+        -webkit-transition: background-color .3s;
+        transition: background-color .3s;
+        font-size: 1rem;
+        padding: 0 15px;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+      }
+      &.circle {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 48px;
+        a {
+          height: 48px;
+          width: 48px;
+          padding: 0;
+          border-radius: 50%;
+          i.material-icons {
+            width: 48px;
+            height: 48px;
+            line-height: 52px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+  &.vertical {
+    width: 100%;
+    margin: 0;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    li {
+      min-height: 40px;
+      line-height: 40px;
+      transition: background-color 0.1s;
+      padding: 4px 0;
+      cursor: pointer;
+      a {
+        min-height: inherit;
+        padding-left: 24px;
+      }
+      i.material-icons {
+        float: left;
+      }
+      span {
+        display: inline-block;
+        padding-left: 32px;
+        line-height: inherit;
+        min-height: inherit;
+        color: inherit;
+        font-size: 0.9rem;
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.title {
+  color: inherit;
+  font-size: 1.8rem;
+}
+
+.popover {
+  position: fixed;
+  padding: 2px;
+  border-radius: 2px;
+  z-index: 10000;
+  overflow: hidden;
+  box-shadow: none;
+  .popover-body {
+    opacity: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+  .popover-grow {
+    position: absolute;
+    padding: 0;
+    top: -50%;
+    left: -50%;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 1;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    transition: padding 0.5s, border-radius 1s;
+    &.right {
+      left: unset;
+      right: -50%;
+    }
+    &.bottom {
+      top: unset;
+      bottom: -50%;
+    }
+  }
+  &:hover {
+    transition: box-shadow 1s;
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+    .popover-grow {
+      transition: padding 0.5s, border-radius 1s, opacity 0.5s ease;
+      padding: 100%;
+      opacity: 0;
+    }
+    .popover-body {
+      transition: opacity steps(1) 0.25s;
+      background-color: transparent;
+      opacity: 1;
+      &>div {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.flex {
+  display: flex;
+  &.flex-col {
+    flex-direction: column;
+  }
+  &.flex-row {
+    flex-direction: row;
+  }
+}
+
+.flex-md {
   flex: 1 0 auto;
 }
 
-.scrollbar-helper {
+%scrollbar-helper {
   overflow-y: overlay;
   &::-webkit-scrollbar {
     width: 10px;
