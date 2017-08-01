@@ -16,7 +16,9 @@
 //= require_tree .
 
 $(() => {
-  $(window).click(() => {
+  const $window = $(window);
+
+  $window.click(() => {
     $('.popover').removeClass('active');
   });
 
@@ -28,7 +30,22 @@ $(() => {
     const $this = $(this);
     const position = $this.offset();
     const $popover = $($this.attr('data-popover'));
-    $popover.css({ 'top': `${position.top + $this.height()/2}px`, 'left': `${(position.left - $popover.width() + $this.width()/2)}px` }).addClass('active');
+
+    // Default to bottom-side on the right.
+    let top = position.top + $this.height() / 2;
+    let left = position.left + $this.width() / 2;
+    $('.popover-grow', $popover).removeClass('bottom, right'); // Make popover open from the top left;
+
+    if (top > $window.height() / 2) {
+      top = position.top - $popover.height();
+      $('.popover-grow', $popover).addClass('bottom'); // Make the popover open from the bottom.
+    }
+    if (left > $window.width() / 2) {
+      left = position.left - $popover.width() + $this.width() / 2;
+      $('.popover-grow', $popover).addClass('right'); // Make the popover open from the right.
+    }
+
+    $popover.css({ 'top': `${top}px`, 'left': `${left}px` }).addClass('active');
     e.stopPropagation();
   });
 });
