@@ -18,15 +18,23 @@
 $(() => {
   const $window = $(window);
 
-  $window.click(() => {
-    $('.popover').removeClass('active');
+  const actors = ['.popover'];
+
+  $window.click((e) => {
+    const $target = $(e.target);
+    actors.forEach(function(actor) {
+      if (!$target.closest(actor).length) {
+        $(actor).removeClass('active');
+      }
+    });
   });
 
-  $('.popover').click((e) => {
-    e.stopPropagation();
+  $('.side-bar-toggle').click((e) => {
+    $('.side-bar').toggleClass('active');
   });
 
   $('[data-popover]').click(function(e) {
+    $('.popover').removeClass('active');
     const $this = $(this);
     const position = $this.offset();
     const $popover = $($this.attr('data-popover'));

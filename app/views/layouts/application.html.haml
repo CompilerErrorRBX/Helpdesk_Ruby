@@ -62,6 +62,17 @@
             = render 'layouts/navigation'
         .body
           %a.title Project
+          %ul.vertical
+            %li
+              %a
+                %i.material-icons dashboard
+                %span Dashboard
+                %span.badge.new
+            %li
+              %a
+                %i.material-icons notifications
+                %span Notifications
+                %span.badge.new
           = yield :sidebar
           %ul.vertical
             %li
@@ -81,10 +92,6 @@
           = yield :footer
       #main-container
         .container-responsive
-          = yield
-    :javascript
-      $(() => {
-        $('.side-bar-toggle').click(() => {
-          $('.side-bar').toggleClass('active');
-        });
-      });
+          .ticket-container
+            = yield
+          
