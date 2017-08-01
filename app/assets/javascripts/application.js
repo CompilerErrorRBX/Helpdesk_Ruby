@@ -16,11 +16,19 @@
 //= require_tree .
 
 $(() => {
+  $(window).click(() => {
+    $('.popover').removeClass('active');
+  });
+
+  $('.popover').click((e) => {
+    e.stopPropagation();
+  });
+
   $('[data-popover]').click(function(e) {
     const $this = $(this);
     const position = $this.offset();
     const $popover = $($this.attr('data-popover'));
-    $popover.css({ 'top': `${position.top + $this.height()/2}px`, 'left': `${(position.left - $popover.width())}px` }).addClass('active');
-    
+    $popover.css({ 'top': `${position.top + $this.height()/2}px`, 'left': `${(position.left - $popover.width() + $this.width()/2)}px` }).addClass('active');
+    e.stopPropagation();
   });
 });
