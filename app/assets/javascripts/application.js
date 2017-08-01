@@ -20,8 +20,7 @@ $(() => {
     const $this = $(this);
     const position = $this.offset();
     const $popover = $($this.attr('data-popover'));
-    console.log(position);
-    $popover.css({ 'top': `${position.top}px`, 'left': `${position.left}px` }).addClass('active');
-
+    $popover.css({ 'top': `${position.top + $this.height()/2}px`, 'left': `${(position.left - $popover.width())}px` }).addClass('active');
+    
   });
 });
