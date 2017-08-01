@@ -37,7 +37,7 @@ $(() => {
     $('.popover-grow', $popover).removeClass('bottom, right'); // Make popover open from the top left;
 
     if (top > $window.height() / 2) {
-      top = position.top - $popover.height();
+      top = position.top - $popover.height() + $this.height() / 2;
       $('.popover-grow', $popover).addClass('bottom'); // Make the popover open from the bottom.
     }
     if (left > $window.width() / 2) {
