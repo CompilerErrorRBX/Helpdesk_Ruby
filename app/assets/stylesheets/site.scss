@@ -40,10 +40,13 @@ $x-large-screen: 1400px;
   }
 }
 
-@mixin set-columns($count) {
+@mixin set-columns($count, $gap) {
   -webkit-columns: 240px $count;
   -moz-columns: 240px $count;
   columns: 240px $count;
+  -webkit-column-gap: $gap;
+  -moz-column-gap: $gap;
+  column-gap: $gap;
 }
 
 html,
@@ -68,9 +71,12 @@ body {
   background-color: #eee;
   #main-container {
     transition: padding 0.5s;
+    &.fixed-navbar {
+      padding-top: 64px;
+    }
   }
   .side-bar {
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     width: 280px;
@@ -138,6 +144,7 @@ body {
 nav {
   &.fixed {
     position: fixed;
+    z-index: 1000;
   }
   .nav-wrapper {
     padding: 0 8px;
@@ -334,14 +341,12 @@ ul {
 }
 
 .ticket-container {
-  @include set-columns(3);
-  -webkit-column-gap: 1em;
-  -moz-column-gap: 1em;
-  column-gap: 1em;
+  @include set-columns(3, 1em);
   .ticket {
     display: inline-block;
     margin: 8px;
     width: 100%;
+    break-inside: avoid;
   }
   // @include respond-to(mobile-screen) {
   //   @include set-columns(1);

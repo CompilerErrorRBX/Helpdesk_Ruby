@@ -33,7 +33,7 @@
               %span Logout
 
     %header
-      %nav{:class => @primary_color}
+      %nav.fixed{:class => @primary_color}
         .nav-wrapper.flex.flex-row
           %ul.horizontal
             %li.circle.side-bar-toggle
@@ -90,7 +90,7 @@
         .footer 
           Contact
           = yield :footer
-      #main-container
+      #main-container.fixed-navbar
         .container-responsive
           .ticket-container
             = yield
