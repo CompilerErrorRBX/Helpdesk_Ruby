@@ -20,6 +20,11 @@ $(() => {
 
   const actors = ['.popover'];
 
+  $('.grid').masonry({
+    itemSelector: '.grid-item',
+    columnWidth: '.grid-sizer'
+  });
+
   $window.click((e) => {
     const $target = $(e.target);
     actors.forEach(function(actor) {

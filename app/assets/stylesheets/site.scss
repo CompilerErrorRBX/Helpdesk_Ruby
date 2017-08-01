@@ -1,6 +1,7 @@
-$mobile-screen: 428px;
-$small-screen: 600px;
+$mobile-screen: 512px;
+$small-screen: 768px;
 $large-screen: 993px;
+$m-large-screen: 1047px;
 $x-large-screen: 1400px;
 @mixin respond-to($media) {
   @if $media==mobile-screen {
@@ -23,6 +24,11 @@ $x-large-screen: 1400px;
       @content;
     }
   }
+  @else if $media==m-large-screen {
+    @media only screen and (min-width: $m-large-screen) {
+      @content;
+    }
+  }
   @else if $media==x-large-screen {
     @media only screen and (min-width: $x-large-screen) {
       @content;
@@ -40,15 +46,6 @@ $x-large-screen: 1400px;
   }
 }
 
-@mixin set-columns($count, $gap) {
-  -webkit-columns: 240px $count;
-  -moz-columns: 240px $count;
-  columns: 240px $count;
-  -webkit-column-gap: $gap;
-  -moz-column-gap: $gap;
-  column-gap: $gap;
-}
-
 html,
 body {
   width: 100%;
@@ -57,10 +54,16 @@ body {
 }
 
 .container-responsive {
-  max-width: 784px;
+  max-width: 512px;
   margin: auto;
-  @include respond-to(small-screen) {
-    width: 100%;
+  @include respond-to(mobile-screen) {
+    max-width: 260px;
+  }
+  @include respond-to(medium-screen) {
+    max-width: 768px;
+  }
+  @include respond-to(m-large-screen) {
+    max-width: 768px;
   }
   @include respond-to(x-large-screen) {
     max-width: 1200px;
@@ -340,25 +343,6 @@ ul {
   }
 }
 
-.ticket-container {
-  @include set-columns(3, 1em);
-  .ticket {
-    display: inline-block;
-    margin: 8px;
-    width: 100%;
-    break-inside: avoid;
-  }
-  // @include respond-to(mobile-screen) {
-  //   @include set-columns(1);
-  // }
-  // @include respond-to(small-screen) {
-  //   @include set-columns(2);
-  // }
-  // @include respond-to(x-large-screen) {
-  //   @include set-columns(4);
-  // }
-}
-
 .flex {
   display: flex;
   &.flex-col {
@@ -375,6 +359,15 @@ ul {
 
 .rotate-180 {
   transform: rotateX(180deg);
+}
+
+#ticket-container {
+  margin: 0 auto;
+  .grid-sizer,
+  .grid-item {
+    width: 240px;
+    margin: 8px;
+  }
 }
 
 %scrollbar-helper {

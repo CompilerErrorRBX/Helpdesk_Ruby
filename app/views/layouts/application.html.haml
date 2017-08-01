@@ -18,6 +18,7 @@
 
     / Compiled and minified JavaScript
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.0/masonry.pkgd.min.js"}
   %body
     #user-dropdown.popover
       .popover-grow
@@ -67,9 +68,8 @@
               %a
                 %i.material-icons dashboard
                 %span Dashboard
-                %span.badge.new
             %li
-              %a
+              %a#notifications
                 %i.material-icons notifications
                 %span Notifications
                 %span.badge.new
@@ -92,6 +92,7 @@
           = yield :footer
       #main-container.fixed-navbar
         .container-responsive
-          .ticket-container
+          #ticket-container.grid
+            .grid-sizer
             = yield
           
