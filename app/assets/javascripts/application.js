@@ -38,6 +38,11 @@ $(() => {
     $('.side-bar').toggleClass('active');
   });
 
+  $('[data-target]').click(function(e) {
+    const $this = $(this);
+    $($this.attr('data-target')).toggleClass($this.attr('data-toggle'));
+  });
+
   $('[data-popover]').click(function(e) {
     $('.popover').removeClass('active');
     const $this = $(this);

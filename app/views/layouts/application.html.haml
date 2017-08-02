@@ -24,20 +24,32 @@
       .popover-grow
       .popover-body
         %ul.vertical.grey-text.text-darken-2
-          %li
+          %li.collection-btn.small
             %a
               %i.material-icons person
               %span My Account
-          %li
+          %li.collection-btn.small
             %a
               %i.material-icons power_settings_new
               %span Logout
+    #ticket-options.popover
+      .popover-grow
+      .popover-body
+        %ul.vertical.grey-text.text-darken-2
+          %li.collection-btn.small
+            %a
+              %i.material-icons archive
+              %span Archive
+          %li.collection-btn.small
+            %a
+              %i.material-icons delete
+              %span Close ticket
 
     %header
       %nav.fixed{:class => @primary_color}
         .nav-wrapper.flex.flex-row
           %ul.horizontal
-            %li.circle.side-bar-toggle
+            %li.circle.side-bar-toggle.collection-btn
               %a.waves-effect.waves-light
                 %i.material-icons menu
           %a.title{:href => "#"} Project
@@ -56,7 +68,7 @@
       .side-bar.grey-text.text-darken-2
         .tool-bar
           %ul.horizontal.left
-            %li.circle.side-bar-toggle
+            %li.circle.side-bar-toggle.collection-btn
               %a
                 %i.material-icons arrow_back
           %ul.horizontal.right
@@ -64,26 +76,26 @@
         .body
           %a.title Project
           %ul.vertical
-            %li
+            %li.collection-btn
               %a
                 %i.material-icons dashboard
                 %span Dashboard
-            %li
+            %li.collection-btn
               %a#notifications
                 %i.material-icons notifications
                 %span Notifications
                 %span.badge.new
           = yield :sidebar
           %ul.vertical
-            %li
+            %li.collection-btn
               %a
                 %i.material-icons settings
                 %span Settings
-            %li
+            %li.collection-btn
               %a
                 %i.material-icons feedback
                 %span Send Feedback
-            %li
+            %li.collection-btn
               %a
                 %i.material-icons help
                 %span Help

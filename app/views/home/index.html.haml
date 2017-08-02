@@ -1,27 +1,55 @@
 - content_for :nav do
-  %li.horizontal.circle
+  %li.horizontal.circle.collection-btn
     %a
       %i.material-icons view_module
 
 - content_for :sidebar do
   %ul.vertical
-    %li
+    %li.collection-btn
       %a
         %i.material-icons receipt
         %span My Tickets
-    %li
+    %li.collection-btn
       %a
         %i.material-icons devices
         %span My Devices
 
 .card.ticket.grid-item
-  .tool-bar.white
-    %span.title Hello, World!
+  .tool-bar.white.border
+    %span.title Ticket #53244
+    %ul.horizontal.right.grey-text.text-darken-1
+      %li.circle.small.collection-btn
+        %a{"data-popover": "#ticket-options"}
+          %i.material-icons more_vert
   .card-content
-    Some content
   .tool-bar.grey.lighten-4
-    %ul.horizontal.left
-      %li.circle
-        %a
-          %i.material-icons arrow_back
-          
+    %ul.horizontal.right.grey-text.text-darken-1
+      %li.circle.small.collection-btn
+        %a.waves-effect.floating{"data-target": ".comment-container", "data-toggle": "active"}
+          %i.material-icons comment
+  %ul.vertical.comment-container
+    %li.comment
+      %a.avatar.blue
+        %i.material-icons person
+      %span.timestamp 2d
+      %span.title 
+        Stephen Martin
+      %p.body
+        I think the difficult part of any sort of development is getting the UI flawless in any circumstances. I really hope this wraps.
+    %li.comment
+      %a.avatar.blue
+        %i.material-icons person
+      %span.timestamp 2d
+      %span.title 
+        Stephen Martin
+      %p.body
+        Hello, World!
+    %li.comment
+      %a.avatar.blue.small
+        %i.material-icons person
+      .comment-input{:contenteditable => "true"}
+      .comment-toolbar.tool-bar.small.transparent
+        %ul.horizontal.right
+          %li.circle.small.collection-btn
+            %a
+              %i.material-icons send

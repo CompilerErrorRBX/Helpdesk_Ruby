@@ -152,7 +152,11 @@ body {
     padding-left: 8px;
     font-size: 0.9rem;
     font-weight: bold;
-    color: rgba(0,0,0,0.55)
+    color: rgba(0, 0, 0, 0.55)
+  }
+  &.small {
+    height: 34px;
+    line-height: 34px;
   }
 }
 
@@ -213,31 +217,31 @@ nav {
 ul {
   list-style-type: none;
   color: inherit;
-  a {
-    display: block;
+  li.collection-btn {
     color: inherit;
-    line-height: inherit;
-  }
-  li {
-    color: inherit;
-  }
-  i.material-icons {
-    line-height: inherit;
-    height: inherit;
-    color: inherit;
+    a {
+      display: block;
+      color: inherit;
+      line-height: inherit;
+    }
+    i.material-icons {
+      line-height: inherit;
+      height: inherit;
+      color: inherit;
+    }
   }
   &.horizontal {
     height: inherit;
     line-height: 0;
     margin: 0;
-    li {
+    &>li.collection-btn {
       display: inline-block;
       height: inherit;
       line-height: inherit;
-      a {
+      &>a {
         cursor: pointer;
         -webkit-transition: background-color .3s;
-        transition: background-color .3s;
+        transition: background-color .2s, box-shadow 0.2s;
         font-size: 1rem;
         padding: 0 15px;
         &:hover {
@@ -249,15 +253,30 @@ ul {
         top: 50%;
         transform: translateY(-50%);
         height: 48px;
-        a {
-          height: 48px;
-          width: 48px;
+        width: 48px;
+        line-height: 48px;
+        &.small {
+          height: 34px;
+          width: 34px;
+          line-height: 34px;
+          &>a>i.material-icons {
+            font-size: 1.2rem;
+          }
+        }
+        &>a {
+          height: inherit;
+          width: inherit;
           padding: 0;
           border-radius: 50%;
-          i.material-icons {
-            width: 48px;
-            height: 48px;
-            line-height: 52px;
+          &.floating {
+            @extend %z-depth-0;
+            &:hover {
+              @extend %z-depth-1;
+            }
+          }
+          &>i.material-icons {
+            width: inherit;
+            height: inherit;
             text-align: center;
           }
         }
@@ -269,20 +288,20 @@ ul {
     margin: 0;
     padding: 8px 0;
     border-bottom: 1px solid #ddd;
-    li {
+    &>li.collection-btn {
       min-height: 40px;
       line-height: 40px;
       transition: background-color 0.1s;
       padding: 4px 0;
       cursor: pointer;
-      a {
+      &>a {
         min-height: inherit;
         padding: 0 16px 0 24px;
       }
-      i.material-icons {
+      &>a>i.material-icons {
         float: left;
       }
-      span:not(.badge) {
+      &>a>span:not(.badge) {
         display: inline-block;
         padding-left: 32px;
         line-height: inherit;
@@ -290,7 +309,7 @@ ul {
         color: inherit;
         font-size: 0.9rem;
       }
-      span.badge {
+      &>a>span.badge {
         padding: 0;
         transform: translateY(50%);
         &:empty {
@@ -300,16 +319,25 @@ ul {
       &:hover {
         background-color: rgba(0, 0, 0, 0.05);
       }
+      &.small {
+        min-height: 24px;
+        line-height: 24px;
+        &>a {
+          padding: 0 8px 0 12px;
+          &>i.material-icons {
+            font-size: 1.1rem;
+          }
+          &>span:not(.badge) {
+            font-size: 0.9rem;
+            padding-left: 12px;
+          }
+        }
+      }
     }
     &:last-child {
       border-bottom: none;
     }
   }
-}
-
-.title {
-  color: inherit;
-  font-size: 1.8rem;
 }
 
 .popover {
@@ -364,6 +392,129 @@ ul {
   }
 }
 
+.avatar {
+  @extend .circle;
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  line-height: 42px;
+  padding: 0;
+  margin: 0;
+  transition: transform 0.1s;
+  transform: scale(1);
+  i.material-icons {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    text-align: center;
+    width: inherit;
+    height: inherit;
+    line-height: inherit;
+    font-size: 2rem;
+  }
+  &.small {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    i.material-icons {
+      font-size: 1.4rem;
+    }
+  }
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+ul.comment-container {
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s;
+  .comment {
+    position: relative;
+    min-height: 64px;
+    transition: background-color 0.2s;
+    padding: 8px 8px 8px 58px;
+    @extend .border;
+    .avatar {
+      position: absolute;
+      left: 8px;
+      &.small {
+        left: 8px;
+        top: 16px;
+      }
+    }
+    .timestamp {
+      float: right;
+      display: none;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.35);
+      padding: 0 8px;
+    }
+    .title {
+      @extend .truncate;
+      font-size: 1rem;
+    }
+    .body {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    .comment-input {
+      margin: 0;
+      font-size: 0.9rem;
+      padding: 14px 0;
+      width: 100%;
+      &+.comment-toolbar {
+        transition: color 0.2s;
+        color: #039be5;
+      }
+      &:focus {
+        outline: none;
+      }
+      &:empty {
+        color: rgba(0, 0, 0, 0.45);
+        cursor: text;
+        &::after {
+          content: "Add a comment...";
+        }
+        &+.comment-toolbar {
+          color: rgba(0, 0, 0, 0.125);
+        }
+      }
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.025);
+      .timestamp {
+        display: inline-block;
+      }
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  &.active {
+    max-height: 1000px;
+  }
+}
+
+.title {
+  color: inherit;
+  font-size: 1.8rem;
+}
+
+.border {
+  border-bottom: 1px solid #ddd;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .flex {
   display: flex;
   &.flex-col {
@@ -380,6 +531,10 @@ ul {
 
 .rotate-180 {
   transform: rotateX(180deg);
+}
+
+.circle {
+  border-radius: 50%;
 }
 
 #ticket-container {
@@ -412,7 +567,7 @@ ul {
 }
 
 %z-depth-0 {
-  box-shadow: none !important; 
+  box-shadow: 0;
 }
 
 %z-depth-1 {
